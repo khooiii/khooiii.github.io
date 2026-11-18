@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lê Tuấn Khôi | Portfolio Cá Nhân</title>
+  <!-- Google Fonts: Inter & JetBrains Mono cho phong cách công nghệ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ================= BIẾN MÀU SẮC (DARK & LIGHT MODE) ================= */
+    :root {
+      --bg-color: #0b0f19;
+      --bg-secondary: #111827;
+      --card-bg: rgba(30, 41, 59, 0.55);
+      --card-border: rgba(148, 163, 184, 0.15);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent-cyan: #38bdf8;
+      --accent-purple: #818cf8;
+      --glow-color: rgba(56, 189, 248, 0.35);
+      --nav-bg: rgba(11, 15, 25, 0.8);
+    }
+
+    [data-theme="light"] {
+      --bg-color: #f1f5f9;
+      --bg-secondary: #ffffff;
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --card-border: rgba(15, 23, 42, 0.1);
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --accent-cyan: #0284c7;
+      --accent-purple: #4f46e5;
+      --glow-color: rgba(2, 132, 199, 0.25);
+      --nav-bg: rgba(241, 245, 249, 0.85);
+    }
+
+    /* ================= CÀI ĐẶT CƠ BẢN ================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-primary);
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
+    }
+
+    /* Hiệu ứng nền công nghệ nhẹ */
+    body::before {
+      content: "";
+      position: fixed;
+      top: -15%;
+      left: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, var(--glow-color) 0%, transparent 70%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .container {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ================= HEADER & STICKY NAVIGATION ================= */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--nav-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .nav-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 68px;
+    }
+
+    .logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--accent-cyan);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-cyan);
+    }
+
+    .theme-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-primary);
+      padding: 8px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .theme-btn:hover {
+      transform: scale(1.05);
+      border-color: var(--accent-cyan);
+    }
+
+    /* ================= KHỐI 1: HERO & PROFILE CARD ================= */
+    .hero {
+      padding: 72px 0 56px;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .avatar-box {
+      position: relative;
+      width: 250px;
+      height: 250px;
+      margin: 0 auto;
+    }
+
+    .avatar-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 28px;
+      border: 3px solid var(--accent-cyan);
+      box-shadow: 0 0 30px var(--glow-color);
+      background-color: var(--bg-secondary);
+    }
+
+    .status-badge {
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-secondary);
+      border: 1px solid var(--accent-cyan);
+      color: var(--accent-cyan);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      padding: 4px 14px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .hero-content h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .hero-content h1 span {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .tagline {
+      font-size: 1.08rem;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+
+    /* Lưới thông tin cá nhân nhanh */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .info-item {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 12px 16px;
+      border-radius: 14px;
+      backdrop-filter: blur(8px);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .info-item:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent-cyan);
+    }
+
+    .info-label {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .info-value {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+      color: #ffffff;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.92;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: var(--card-bg);
+      color: var(--text-primary);
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 1px solid var(--card-border);
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent-cyan);
+      transform: translateY(-2px);
+    }
+
+    /* ================= CÁC SECTION CHUNG ================= */
+    section {
+      padding: 56px 0;
+    }
+
+    .section-title {
+      font-size: 1.65rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::before {
+      content: "#";
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-cyan);
+    }
+
+    .section-subtitle {
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      font-size: 0.98rem;
+    }
+
+    /* ================= KHỐI 2: GIỚI THIỆU & KỸ NĂNG ================= */
+    .about-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 28px;
+      backdrop-filter: blur(8px);
+    }
+
+    .about-card p {
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+    }
+
+    .about-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .skill-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 20px;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-cyan);
+    }
+
+    .skill-card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+      color: var(--accent-cyan);
+    }
+
+    .skill-card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+    }
+
+    /* ================= KHỐI 3: DỰ ÁN & HOẠT ĐỘNG ================= */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-purple);
+    }
+
+    .project-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent-cyan);
+      background: rgba(56, 189, 248, 0.12);
+      padding: 4px 10px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 12px;
+      width: fit-content;
+    }
+
+    .project-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+    }
+
+    .project-card p {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      margin-bottom: 18px;
+    }
+
+    .project-link {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .project-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ================= KHỐI 4: LIÊN HỆ & FOOTER ================= */
+    .contact-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 32px;
+      text-align: center;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .social-btn {
+      background: var(--bg-secondary);
+      border: 1px solid var(--card-border);
+      color: var(--text-primary);
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-size: 0.92rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .social-btn:hover {
+      border-color: var(--accent-cyan);
+      transform: translateY(-2px);
+    }
+
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 28px 0;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.88rem;
+      margin-top: 40px;
+    }
+
+    /* ================= RESPONSIVE CHO ĐIỆN THOẠI ================= */
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 32px;
+        padding-top: 44px;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+        text-align: left;
+      }
+
+      .cta-group {
+        justify-content: center;
+      }
+
+      .nav-links {
+        gap: 16px;
+      }
+
+      .nav-links a {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= THANH ĐIỀU HƯỚNG ================= -->
+  <header>
+    <div class="container nav-wrapper">
+      <a href="#" class="logo">&lt;TuanKhoi/&gt;</a>
+      <ul class="nav-links">
+        <li><a href="#gioi-thieu">Giới thiệu</a></li>
+        <li><a href="#ky-nang">Kỹ năng</a></li>
+        <li><a href="#du-an">Dự án</a></li>
+        <li><a href="#lien-he">Liên hệ</a></li>
+        <li>
+          <button class="theme-btn" id="themeToggle" title="Chuyển chế độ Sáng/Tối">🌙</button>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- ================= KHỐI 1: HỒ SƠ CÁ NHÂN ================= -->
+    <section class="hero" id="top">
+      <div class="avatar-box">
+        <!-- Đường dẫn ảnh đại diện chuẩn trên GitHub -->
+        <img 
+          src="images/avatar.jpg" 
+          alt="Ảnh đại diện Lê Tuấn Khôi" 
+          onerror="this.src='https://api.dicebear.com/9.x/avataaars/svg?seed=TuanKhoi'"
+        />
+        <span class="status-badge">● 11 Toán 2 • Chuyên Bến Tre</span>
+      </div>
+
+      <div class="hero-content">
+        <h1>Xin chào, mình là <span>Lê Tuấn Khôi</span></h1>
+        <p class="tagline">
+          Học sinh lớp 11 Toán 2 – Trường THPT Chuyên Bến Tre. Yêu thích tư duy logic, công nghệ số và khám phá lập trình web.
+        </p>
+
+        <!-- Bảng thông tin cá nhân nhanh -->
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">📍 Nơi sinh sống</span>
+            <span class="info-value">Bến Tre</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">🏫 Trường học</span>
+            <span class="info-value">THPT Chuyên Bến Tre</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">🎓 Lớp / Khóa</span>
+            <span class="info-value">Lớp 11 Toán 2 (Niên khóa 2026)</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">💡 Sở thích & Đam mê</span>
+            <span class="info-value">Toán học, Công nghệ, Lập trình Web</span>
+          </div>
+        </div>
+
+        <div class="cta-group">
+          <a href="#lien-he" class="btn-primary">Kết nối với mình</a>
+          <a href="#du-an" class="btn-outline">Xem bài tập & Dự án</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= KHỐI 2: GIỚI THIỆU & KỸ NĂNG ================= -->
+    <section id="gioi-thieu">
+      <h2 class="section-title">Giới thiệu bản thân</h2>
+      <p class="section-subtitle">Một vài chia sẻ ngắn gọn gửi tới bạn bè và thầy cô.</p>
+      
+      <div class="about-card">
+        <p>
+          Xin chào thầy cô và các bạn! Mình là <strong>Lê Tuấn Khôi</strong>, hiện đang học tập tại <strong>Lớp 11 Toán 2 - Trường THPT Chuyên Bến Tre</strong>. 
+          Trang web nhỏ này là nơi mình lưu giữ hành trình học tập, các bài thuyết trình, dự án cá nhân cũng như thông tin liên hệ để mọi người dễ dàng kết nối với mình hơn.
+        </p>
+        <p>
+          Bên cạnh niềm yêu thích dành cho Toán học, mình còn đặc biệt hứng thú với việc ứng dụng công nghệ vào học tập và đời sống — từ việc tự thiết kế trang web cá nhân trên GitHub cho tới việc tìm hiểu các công cụ AI và lập trình cơ bản.
+        </p>
+      </div>
+
+      <h2 class="section-title" id="ky-nang" style="margin-top: 48px;">Kỹ năng & Lĩnh vực quan tâm</h2>
+      <p class="section-subtitle">Những kiến thức và công cụ mình đang trau dồi mỗi ngày.</p>
+
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>📐 Tư duy Toán học & Logic</h3>
+          <p>Phân tích vấn đề hệ thống, giải quyết bài toán tư duy và rèn luyện kỹ năng lập luận chặt chẽ.</p>
+        </div>
+        <div class="skill-card">
+          <h3>💻 Lập trình Web cơ bản</h3>
+          <p>Xây dựng giao diện web tĩnh hiện đại với HTML5, CSS3 và JavaScript, quản lý mã nguồn trên GitHub.</p>
+        </div>
+        <div class="skill-card">
+          <h3>🤖 Ứng dụng Công nghệ & AI</h3>
+          <p>Khai thác các công cụ trí tuệ nhân tạo hỗ trợ nghiên cứu tài liệu, học ngoại ngữ và tối ưu hiệu suất học tập.</p>
+        </div>
+        <div class="skill-card">
+          <h3>🤝 Làm việc nhóm & Thuyết trình</h3>
+          <p>Tích cực tham gia các hoạt động ngoại khóa, câu lạc bộ và dự án học tập cùng tập thể lớp 11 Toán 2.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= KHỐI 3: DỰ ÁN & HOẠT ĐỘNG HỌC TẬP ================= -->
+    <section id="du-an">
+      <h2 class="section-title">Dự án & Hoạt động nổi bật</h2>
+      <p class="section-subtitle">Tổng hợp các sản phẩm học tập và kỷ niệm đáng nhớ.</p>
+
+      <div class="projects-grid">
+        <div class="project-card">
+          <div>
+            <span class="project-tag">Web cá nhân</span>
+            <h3>Portfolio Giới Thiệu Bản Thân</h3>
+            <p>Website lưu trữ hồ sơ cá nhân, thông tin lớp học và kết nối bạn bè, triển khai miễn phí trên GitHub Pages.</p>
+          </div>
+          <a href="#top" class="project-link">Đang xem trực tiếp →</a>
+        </div>
+
+        <div class="project-card">
+          <div>
+            <span class="project-tag">Bài tập nhóm</span>
+            <h3>Dự án Nghiên cứu Khoa học / Tin học</h3>
+            <p>Sản phẩm thực hành môn Tin học / Công nghệ thực hiện cùng tổ học tập tại trường THPT Chuyên Bến Tre.</p>
+          </div>
+          <a href="#lien-he" class="project-link">Tìm hiểu thêm →</a>
+        </div>
+
+        <div class="project-card">
+          <div>
+            <span class="project-tag">Hoạt động lớp</span>
+            <h3>Kỷ yếu & Hoạt động Ngoại khóa</h3>
+            <p>Lưu giữ những khoảnh khắc đáng nhớ cùng tập thể lớp 11 Toán 2 và thầy cô trong năm học 2026.</p>
+          </div>
+          <a href="#lien-he" class="project-link">Kết nối chia sẻ →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= KHỐI 4: LIÊN HỆ ================= -->
+    <section id="lien-he">
+      <div class="contact-box">
+        <h2 class="section-title" style="justify-content: center;">Kết nối với mình</h2>
+        <p class="section-subtitle" style="margin-bottom: 12px;">
+          Thầy cô và các bạn có thể liên hệ với mình qua các kênh bên dưới nhé!
+        </p>
+
+        <div class="social-links">
+          <!-- Bạn hãy thay link Facebook, Zalo, GitHub thật của bạn vào dấu # hoặc link mẫu bên dưới -->
+          <a href="https://www.facebook.com/le.khoi.875409/" target="_blank" class="social-btn">📘 Facebook</a>
+          <a href="https://github.com/khooiii" target="_blank" class="social-btn">🐙 GitHub</a>
+          <button class="social-btn" onclick="copyEmail()">📧 Copy Email</button>
+        </div>
+        <p id="copyNotice" style="color: var(--accent-cyan); font-size: 0.85rem; margin-top: 12px; display: none;">
+          ✓ Đã sao chép địa chỉ email vào bộ nhớ tạm!
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Lê Tuấn Khôi • Lớp 11 Toán 2 – THPT Chuyên Bến Tre.</p>
+    </div>
+  </footer>
+
+  <!-- ================= JAVASCRIPT NHẸ CHO TƯƠNG TÁC ================= -->
+  <script>
+    // 1. Chuyển đổi chế độ Sáng / Tối (Dark / Light Mode)
+    const themeToggle = document.getElementById('themeToggle');
+    const htmlEl = document.documentElement;
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = htmlEl.getAttribute('data-theme');
+      const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      htmlEl.setAttribute('data-theme', nextTheme);
+      themeToggle.textContent = nextTheme === 'dark' ? '🌙' : '☀️';
+    });
+
+    // 2. Nút sao chép nhanh Email (Bạn hãy sửa email thật của bạn ở dòng dưới)
+    function copyEmail() {
+      const myEmail = "letuankhoi1015@gmail.com";
+      navigator.clipboard.writeText(myEmail).then(() => {
+        const notice = document.getElementById('copyNotice');
+        notice.style.display = 'block';
+        setTimeout(() => {
+          notice.style.display = 'none';
+        }, 3000);
+      });
+    }
+  </script>
+</body>
+</html>
