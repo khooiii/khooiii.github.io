@@ -495,9 +495,9 @@
     <!-- ================= KHỐI 1: HỒ SƠ CÁ NHÂN ================= -->
     <section class="hero" id="top">
       <div class="avatar-box">
-        <!-- Đường dẫn ảnh đại diện chuẩn trên GitHub -->
+        <!-- Đường dẫn ảnh đại diện trực tiếp từ kho GitHub của bạn -->
         <img 
-          src="images/avatar.jpg" 
+          src="https://github.com/khooiii/khooiii.github.io/blob/main/images/avatar.jpg?raw=true" 
           alt="Ảnh đại diện Lê Tuấn Khôi" 
           onerror="this.src='https://api.dicebear.com/9.x/avataaars/svg?seed=TuanKhoi'"
         />
@@ -619,7 +619,6 @@
         </p>
 
         <div class="social-links">
-          <!-- Bạn hãy thay link Facebook, Zalo, GitHub thật của bạn vào dấu # hoặc link mẫu bên dưới -->
           <a href="https://www.facebook.com/le.khoi.875409/" target="_blank" class="social-btn">📘 Facebook</a>
           <a href="https://github.com/khooiii" target="_blank" class="social-btn">🐙 GitHub</a>
           <button class="social-btn" onclick="copyEmail()">📧 Copy Email</button>
@@ -650,7 +649,7 @@
       themeToggle.textContent = nextTheme === 'dark' ? '🌙' : '☀️';
     });
 
-    // 2. Nút sao chép nhanh Email (Bạn hãy sửa email thật của bạn ở dòng dưới)
+    // 2. Nút sao chép nhanh Email
     function copyEmail() {
       const myEmail = "letuankhoi1015@gmail.com";
       navigator.clipboard.writeText(myEmail).then(() => {
